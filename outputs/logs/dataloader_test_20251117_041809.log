@@ -1,0 +1,62 @@
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - ================================================================================
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - DataLoader Functionality Test
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - ================================================================================
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - 
+[STEP 1] Checking data directory structure...
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - Current directory: D:\condsar
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - Data directory: D:\condsar\data
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - [OK] Data directory exists
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - Items in data/: 3
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -   - post: DIR
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -     Contains 4248 items
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000000_post_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000001_post_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000002_post_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000003_post_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000004_post_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       ... and 4243 more
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -   - pre: DIR
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -     Contains 3396 items
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000000_pre_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000001_pre_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000002_pre_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000003_pre_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000004_pre_disaster.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       ... and 3391 more
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -   - target: DIR
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -     Contains 4247 items
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000000_building_damage.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000001_building_damage.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000002_building_damage.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000003_building_damage.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       * bata-explosion_00000004_building_damage.tif
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       ... and 4242 more
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - 
+[STEP 2] Testing source domain dataset...
+2025-11-17 04:18:09 - dataloader_test - [33mWARNING[0m - [WARN] Source directory does not exist: D:\condsar\data\source
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - 
+[STEP 5] Testing target domain dataset...
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - [OK] Target directory exists: D:\condsar\data\target
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -   - pre/ (RGB images): exists=False
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -   - mask/ (Building masks): exists=False
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - 
+================================================================================
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - Test Summary
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - ================================================================================
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - 
+Data structure expected:
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -   data/
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -     source/
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       pre/        (RGB images)
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       post/       (SAR images)
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       mask/       (Building masks)
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       metadata.json
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -     target/
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       pre/        (RGB images)
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -       mask/       (Building masks)
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - 
+To create test data, you can use:
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m -   python scripts/verify.py --full --create-data
+2025-11-17 04:18:09 - dataloader_test - [32mINFO[0m - 
+Log files saved to: ./outputs/logs/
+

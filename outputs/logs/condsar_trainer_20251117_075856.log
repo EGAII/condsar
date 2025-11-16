@@ -1,0 +1,13 @@
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m - Loading source dataset from ./data
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m - Loaded 3155 images from metadata.json
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m - Disaster types: ['Volcano', 'Earthquake', 'Wildfire', 'Flood']
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m -    Batch size: 1
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m -    Total batches: 3155
+2025-11-17 07:58:56 - condsar_trainer - [32mINFO[0m - Creating EnhancedDisasterControlNet...
+2025-11-17 07:58:58 - condsar_trainer - [32mINFO[0m - Creating SAR VAE Decoder...
+2025-11-17 07:58:58 - condsar_trainer - [32mINFO[0m - 
+================================================================================
+2025-11-17 07:58:58 - condsar_trainer - [32mINFO[0m - ================================================================================
+

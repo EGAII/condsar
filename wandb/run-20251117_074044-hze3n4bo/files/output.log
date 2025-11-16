@@ -1,0 +1,59 @@
+2025-11-17 07:40:47 - condsar_trainer - [32mINFO[0m - ✅ WandB initialized
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 550, in main
+    trainer = CondsarTrainer(config)
+  File "D:\condsar\scripts\train.py", line 229, in __init__
+    self.logger.info("✅ WandB initialized")
+Message: '✅ WandB initialized'
+Arguments: ()
+2025-11-17 07:40:47 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:40:47 - condsar_trainer - [32mINFO[0m - 🎯 Setting up STAGE A: Source Domain Training
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f3af' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 554, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 331, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 245, in setup_stage_a
+    self.logger.info("🎯 Setting up STAGE A: Source Domain Training")
+Message: '🎯 Setting up STAGE A: Source Domain Training'
+Arguments: ()
+2025-11-17 07:40:47 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:40:47 - condsar_trainer - [32mINFO[0m - Loading source dataset from ./data/source
+Traceback (most recent call last):
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 554, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 331, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 250, in setup_stage_a
+    self.train_dataset = DisasterSARDataset(
+  File "D:\condsar\models\training_utils.py", line 388, in __init__
+    raise FileNotFoundError(f"metadata.json not found in {self.dataset_dir}")
+FileNotFoundError: metadata.json not found in data\source
+Traceback (most recent call last):
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 554, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 331, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 250, in setup_stage_a
+    self.train_dataset = DisasterSARDataset(
+  File "D:\condsar\models\training_utils.py", line 388, in __init__
+    raise FileNotFoundError(f"metadata.json not found in {self.dataset_dir}")
+FileNotFoundError: metadata.json not found in data\source

@@ -1,0 +1,26 @@
+====================================================================================================
+METADATA.JSON VALIDATION REPORT
+====================================================================================================
+
+[Basic Information]
+Verification Time: 1763322865.681045
+metadata.json Path: D:\condsar\data\metadata.json
+File Size: 876.60 KB
+Total Entries: 3155
+Valid Entries: 3155
+
+[Disaster Type Statistics]
+  Volcano             :  1056 ( 33.5%) | Avg Severity: 0.500
+  Earthquake          :  1833 ( 58.1%) | Avg Severity: 0.500
+  Wildfire            :   142 (  4.5%) | Avg Severity: 0.500
+  Flood               :   124 (  3.9%) | Avg Severity: 0.500
+
+[Data Quality Check]
+  Invalid Disaster Types: 0
+  Missing Files: 0
+
+[Conclusion]
+  Status: PASSED
+  metadata.json data is complete and correct, ready for training
+
+====================================================================================================

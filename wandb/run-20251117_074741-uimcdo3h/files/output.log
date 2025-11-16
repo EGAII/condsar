@@ -1,0 +1,85 @@
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - ✅ WandB initialized
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 550, in main
+    trainer = CondsarTrainer(config)
+  File "D:\condsar\scripts\train.py", line 229, in __init__
+    self.logger.info("✅ WandB initialized")
+Message: '✅ WandB initialized'
+Arguments: ()
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - 🎯 Setting up STAGE A: Source Domain Training
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f3af' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 554, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 331, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 245, in setup_stage_a
+    self.logger.info("🎯 Setting up STAGE A: Source Domain Training")
+Message: '🎯 Setting up STAGE A: Source Domain Training'
+Arguments: ()
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Loading source dataset from ./data
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Loaded 3155 images from metadata.json
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Disaster types: ['Volcano', 'Earthquake', 'Wildfire', 'Flood']
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - ✅ Loaded 3155 training samples
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 554, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 331, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 265, in setup_stage_a
+    self.logger.info(f"✅ Loaded {len(self.train_dataset)} training samples")
+Message: '✅ Loaded 3155 training samples'
+Arguments: ()
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m -    Batch size: 2
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m -    Total batches: 1578
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Creating EnhancedDisasterControlNet...
+Traceback (most recent call last):
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 554, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 331, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 271, in setup_stage_a
+    self.model = EnhancedDisasterControlNet(
+  File "D:\condsar\models\enhanced_condsar.py", line 147, in __init__
+    super().__init__(**kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\diffusers\configuration_utils.py", line 699, in inner_init
+    init(self, *args, **init_kwargs)
+TypeError: ControlNetModel.__init__() got an unexpected keyword argument 'embedding_dim'
+Traceback (most recent call last):
+  File "D:\condsar\scripts\train.py", line 560, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 554, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 331, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 271, in setup_stage_a
+    self.model = EnhancedDisasterControlNet(
+  File "D:\condsar\models\enhanced_condsar.py", line 147, in __init__
+    super().__init__(**kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\diffusers\configuration_utils.py", line 699, in inner_init
+    init(self, *args, **init_kwargs)
+TypeError: ControlNetModel.__init__() got an unexpected keyword argument 'embedding_dim'

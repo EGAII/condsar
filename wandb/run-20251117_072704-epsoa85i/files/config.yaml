@@ -1,0 +1,67 @@
+_wandb:
+    value:
+        cli_version: 0.22.2
+        e:
+            hcwr5mrhdjf8hwy7m1wcts5pi1xjox27:
+                args:
+                    - --config
+                    - config_training.yaml
+                codePath: scripts\train.py
+                codePathLocal: scripts\train.py
+                cpu_count: 16
+                cpu_count_logical: 24
+                cudaVersion: "12.8"
+                disk:
+                    /:
+                        total: "808378691584"
+                        used: "765310205952"
+                email: 2630862330@qq.com
+                executable: C:\Users\26308\.conda\envs\diffusers\python.exe
+                git:
+                    commit: f9e90b30c419d7c501e40ded86648442a2b7d4ee
+                    remote: https://github.com/EGAII/condsar.git
+                gpu: NVIDIA GeForce RTX 4070 Laptop GPU
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ada
+                      cudaCores: 4608
+                      memoryTotal: "8585740288"
+                      name: NVIDIA GeForce RTX 4070 Laptop GPU
+                      uuid: GPU-db5da7f7-9b5f-5ac1-cb9e-c3f285585ab7
+                host: EGAIPC
+                memory:
+                    total: "34078035968"
+                os: Windows-10-10.0.26100-SP0
+                program: D:\condsar\scripts\train.py
+                python: CPython 3.10.19
+                root: D:\condsar
+                startedAt: "2025-11-16T22:27:04.106596Z"
+                writerId: hcwr5mrhdjf8hwy7m1wcts5pi1xjox27
+        m: []
+        python_version: 3.10.19
+        t:
+            "1":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 71
+                - 83
+            "2":
+                - 1
+                - 11
+                - 41
+                - 49
+                - 71
+                - 83
+            "3":
+                - 13
+            "4": 3.10.19
+            "5": 0.22.2
+            "6": 4.57.1
+            "8":
+                - 3
+            "10":
+                - 20
+            "12": 0.22.2
+            "13": windows-amd64

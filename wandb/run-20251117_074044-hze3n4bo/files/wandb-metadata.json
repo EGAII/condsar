@@ -1,0 +1,21 @@
+{
+  "os": "Windows-10-10.0.26100-SP0",
+  "python": "CPython 3.10.19",
+  "startedAt": "2025-11-16T22:40:44.170834Z",
+  "args": [
+    "--config",
+    "config_training.yaml"
+  ],
+  "program": "D:\\condsar\\scripts\\train.py",
+  "codePath": "scripts\\train.py",
+  "codePathLocal": "scripts\\train.py",
+  "git": {
+    "remote": "https://github.com/EGAII/condsar.git",
+    "commit": "f9e90b30c419d7c501e40ded86648442a2b7d4ee"
+  },
+  "email": "2630862330@qq.com",
+  "root": "D:\\condsar",
+  "host": "EGAIPC",
+  "executable": "C:\\Users\\26308\\.conda\\envs\\diffusers\\python.exe",
+  "writerId": "4dmeh8hhsa77vhgsoo6jxqacsa410t7a"
+}

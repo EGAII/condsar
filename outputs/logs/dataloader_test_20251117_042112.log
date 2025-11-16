@@ -1,0 +1,95 @@
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - ==========================================================================================
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - DataLoader Test - Real Data Structure Analysis
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - ==========================================================================================
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - 
+[TEST 1] Check data directory structure...
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - Data root: D:\condsar\data
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - Target directory: D:\condsar\data\target
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - [OK] Target directory exists
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - Subdirectories found: 0
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - 
+Mask files directly in target/: 4246
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Sample files:
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -     * bata-explosion_00000000_building_damage.tif
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -     * bata-explosion_00000001_building_damage.tif
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -     * bata-explosion_00000002_building_damage.tif
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -     * bata-explosion_00000003_building_damage.tif
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -     * bata-explosion_00000004_building_damage.tif
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -     ... and 4241 more
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - 
+[TEST 2] Check expected DataLoader structure...
+2025-11-17 04:21:12 - dataloader_test - [33mWARNING[0m - [WARN] pre: NOT found
+2025-11-17 04:21:12 - dataloader_test - [33mWARNING[0m - [WARN] post: NOT found
+2025-11-17 04:21:12 - dataloader_test - [33mWARNING[0m - [WARN] mask: NOT found
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - 
+[TEST 3] Analyzing actual mask file...
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - Sample file: bata-explosion_00000000_building_damage.tif
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Shape: (1024, 1024)
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Dtype: uint8
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Min value: 0
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Max value: 1
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Unique values: [0, 1]
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - [OK] Mask already in [0-3] range
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - 
+[TEST 4] Test DataLoader creation...
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - Creating test structure in: data_test_structure
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Created: pre
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Created: post
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   Created: mask
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m - 
+Copying sample files for testing...
+2025-11-17 04:21:12 - dataloader_test - [36mDEBUG[0m -   Preparing sample: bata-explosion_00000000.tif
+2025-11-17 04:21:12 - dataloader_test - [32mINFO[0m -   [OK] Copied mask: bata-explosion_00000000.tif
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -     Created dummy RGB
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -     Created dummy SAR
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -   Preparing sample: bata-explosion_00000001.tif
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   [OK] Copied mask: bata-explosion_00000001.tif
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -     Created dummy RGB
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -     Created dummy SAR
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -   Preparing sample: bata-explosion_00000002.tif
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   [OK] Copied mask: bata-explosion_00000002.tif
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -     Created dummy RGB
+2025-11-17 04:21:13 - dataloader_test - [36mDEBUG[0m -     Created dummy SAR
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+[TEST 5] Test DataLoader with test structure...
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - Loaded 3 images from data_test_structure
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - [OK] DataLoader created successfully
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - Dataset size: 3
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+Loading sample from dataset...
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - Sample keys: ['image_id', 'rgb_image', 'sar_image', 'building_mask', 'disaster_type', 'disaster_severity']
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - RGB: shape=torch.Size([3, 512, 512]), dtype=torch.float32, range=[0.000, 1.000]
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - SAR: shape=torch.Size([1, 512, 512]), dtype=torch.float32, range=[0.000, 1.000]
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - Mask: shape=torch.Size([1, 512, 512]), dtype=torch.float32, range=[0.000, 1.000]
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - Mask unique values: [0.0, 1.0]
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - [OK] Mask successfully normalized to [0-3]
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+[TEST 6] Test batch loading...
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - [OK] Batch loaded successfully
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - Batch keys: ['image_id', 'rgb_image', 'sar_image', 'building_mask', 'disaster_type', 'disaster_severity']
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   rgb_image: torch.Size([2, 3, 512, 512])
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   sar_image: torch.Size([2, 1, 512, 512])
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   building_mask: torch.Size([2, 1, 512, 512])
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   disaster_type: torch.Size([2])
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   disaster_severity: torch.Size([2])
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+[CLEANUP] Removing test structure...
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - [OK] Test structure removed
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+==========================================================================================
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - Test Summary
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - ==========================================================================================
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+Your data structure in data/target/:
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   - Contains mask files: *_building_damage.tif
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   - Format: TIF (supported)
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   - Values: [0-255] (auto-normalized to [0-3])
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+To use DataLoader, you need:
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -   data/target/
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -     pre/      (RGB images)
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -     post/     (SAR images)
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m -     mask/     (Building masks)
+2025-11-17 04:21:13 - dataloader_test - [32mINFO[0m - 
+Log saved to: ./outputs/logs/
+

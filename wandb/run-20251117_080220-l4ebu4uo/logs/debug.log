@@ -1,0 +1,208 @@
+2025-11-17 08:02:20,770 INFO    MainThread:4940 [wandb_setup.py:_flush():81] Current SDK version is 0.22.2
+2025-11-17 08:02:20,770 INFO    MainThread:4940 [wandb_setup.py:_flush():81] Configure stats pid to 4940
+2025-11-17 08:02:20,771 INFO    MainThread:4940 [wandb_setup.py:_flush():81] Loading settings from C:\Users\26308\.config\wandb\settings
+2025-11-17 08:02:20,771 INFO    MainThread:4940 [wandb_setup.py:_flush():81] Loading settings from D:\condsar\wandb\settings
+2025-11-17 08:02:20,771 INFO    MainThread:4940 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2025-11-17 08:02:20,771 INFO    MainThread:4940 [wandb_init.py:setup_run_log_directory():705] Logging user logs to D:\condsar\wandb\run-20251117_080220-l4ebu4uo\logs\debug.log
+2025-11-17 08:02:20,772 INFO    MainThread:4940 [wandb_init.py:setup_run_log_directory():706] Logging internal logs to D:\condsar\wandb\run-20251117_080220-l4ebu4uo\logs\debug-internal.log
+2025-11-17 08:02:20,772 INFO    MainThread:4940 [wandb_init.py:init():832] calling init triggers
+2025-11-17 08:02:20,774 INFO    MainThread:4940 [wandb_init.py:init():837] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-11-17 08:02:20,774 INFO    MainThread:4940 [wandb_init.py:init():880] starting backend
+2025-11-17 08:02:23,029 INFO    MainThread:4940 [wandb_init.py:init():883] sending inform_init request
+2025-11-17 08:02:23,046 INFO    MainThread:4940 [wandb_init.py:init():891] backend started and connected
+2025-11-17 08:02:23,047 INFO    MainThread:4940 [wandb_init.py:init():961] updated telemetry
+2025-11-17 08:02:23,077 INFO    MainThread:4940 [wandb_init.py:init():985] communicating run to backend with 90.0 second timeout
+2025-11-17 08:02:23,623 INFO    MainThread:4940 [wandb_init.py:init():1036] starting run threads in backend
+2025-11-17 08:02:23,702 INFO    MainThread:4940 [wandb_run.py:_console_start():2509] atexit reg
+2025-11-17 08:02:23,702 INFO    MainThread:4940 [wandb_run.py:_redirect():2357] redirect: wrap_raw
+2025-11-17 08:02:23,702 INFO    MainThread:4940 [wandb_run.py:_redirect():2426] Wrapping output streams.
+2025-11-17 08:02:23,703 INFO    MainThread:4940 [wandb_run.py:_redirect():2449] Redirects installed.
+2025-11-17 08:02:23,706 INFO    MainThread:4940 [wandb_init.py:init():1076] run started, returning control to user process
+2025-11-17 08:05:23,213 ERROR   wandb-AsyncioManager-main:4940 [service_client.py:_forward_responses():77] Error reading server response.
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\windows_events.py", line 494, in finish_recv
+    return ov.getresult()
+OSError: [WinError 64] 指定的网络名不再可用。
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 73, in _forward_responses
+    while response := await self._read_server_response():
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 87, in _read_server_response
+    header = await self._reader.readexactly(_HEADER_BYTE_INT_LEN)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 708, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 501, in _wait_for_data
+    await self._waiter
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\windows_events.py", line 826, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\windows_events.py", line 498, in finish_recv
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] 指定的网络名不再可用。
+2025-11-17 08:05:23,237 INFO    wandb-AsyncioManager-main:4940 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.
+2025-11-17 08:05:37,322 ERROR   MainThread:4940 [redirect.py:_on_write():664] [all runs] error in stderr callback
+Traceback (most recent call last):
+  File "D:\condsar\models\enhanced_condsar.py", line 283, in forward
+    mask_feat = self.mask_processor(building_mask)  # (B, C, H, W)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\diffusers\models\modeling_utils.py", line 273, in __getattr__
+    return super().__getattr__(name)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1964, in __getattr__
+    raise AttributeError(
+AttributeError: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'. Did you mean: 'rgb_processor'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 2436, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 399, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 457, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 1595, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface.py", line 802, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 37, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface_sock.py", line 43, in _publish
+    self._asyncer.run(lambda: self._client.publish(request))
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 136, in run
+    return future.result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\concurrent\futures\_base.py", line 458, in result
+    return self.__get_result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\concurrent\futures\_base.py", line 403, in __get_result
+    raise self._exception
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 219, in _wrap
+    return await fn()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 359, in drain
+    raise exc
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 73, in _forward_responses
+    while response := await self._read_server_response():
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 87, in _read_server_response
+    header = await self._reader.readexactly(_HEADER_BYTE_INT_LEN)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 708, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 501, in _wait_for_data
+    await self._waiter
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\windows_events.py", line 826, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\windows_events.py", line 498, in finish_recv
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] 指定的网络名不再可用。
+2025-11-17 08:05:37,389 ERROR   MainThread:4940 [redirect.py:_on_write():664] [all runs] error in stderr callback
+Traceback (most recent call last):
+  File "D:\condsar\scripts\train.py", line 375, in train_stage_a
+    outputs = self.model(
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "D:\condsar\models\enhanced_condsar.py", line 350, in forward
+    fused = self.multi_modal_fusion(torch.cat([spatial_feat, disaster_feat], dim=1))
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\container.py", line 250, in forward
+    input = module(input)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\activation.py", line 473, in forward
+    return F.silu(input, inplace=self.inplace)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\functional.py", line 2371, in silu
+    return torch._C._nn.silu(input)
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 2436, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 399, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 457, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 1595, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface.py", line 802, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 37, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface_sock.py", line 43, in _publish
+    self._asyncer.run(lambda: self._client.publish(request))
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 136, in run
+    return future.result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\concurrent\futures\_base.py", line 458, in result
+    return self.__get_result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\concurrent\futures\_base.py", line 403, in __get_result
+    raise self._exception
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 219, in _wrap
+    return await fn()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 359, in drain
+    raise exc
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\redirect.py", line 662, in _on_write
+    cb(written_data)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 2436, in <lambda>
+    lambda data: self._console_raw_callback("stderr", data),
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 399, in wrapper
+    return func(self, *args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 457, in wrapper_fn
+    return func(self, *args, **kwargs)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\wandb_run.py", line 1595, in _console_raw_callback
+    self._backend.interface.publish_output_raw(name, data)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface.py", line 802, in publish_output_raw
+    self._publish_output_raw(o)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface_shared.py", line 37, in _publish_output_raw
+    self._publish(rec)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\interface\interface_sock.py", line 43, in _publish
+    self._asyncer.run(lambda: self._client.publish(request))
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 136, in run
+    return future.result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\concurrent\futures\_base.py", line 458, in result
+    return self.__get_result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\concurrent\futures\_base.py", line 403, in __get_result
+    raise self._exception
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\asyncio_manager.py", line 219, in _wrap
+    return await fn()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 38, in publish
+    await self._send_server_request(request)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 64, in _send_server_request
+    await self._writer.drain()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 359, in drain
+    raise exc
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 73, in _forward_responses
+    while response := await self._read_server_response():
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\wandb\sdk\lib\service\service_client.py", line 87, in _read_server_response
+    header = await self._reader.readexactly(_HEADER_BYTE_INT_LEN)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 708, in readexactly
+    await self._wait_for_data('readexactly')
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\streams.py", line 501, in _wait_for_data
+    await self._waiter
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\proactor_events.py", line 286, in _loop_reading
+    length = fut.result()
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\windows_events.py", line 826, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\asyncio\windows_events.py", line 498, in finish_recv
+    raise ConnectionResetError(*exc.args)
+ConnectionResetError: [WinError 64] 指定的网络名不再可用。

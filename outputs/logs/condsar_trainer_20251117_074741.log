@@ -1,0 +1,8 @@
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Loading source dataset from ./data
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Loaded 3155 images from metadata.json
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Disaster types: ['Volcano', 'Earthquake', 'Wildfire', 'Flood']
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m -    Batch size: 2
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m -    Total batches: 1578
+2025-11-17 07:47:44 - condsar_trainer - [32mINFO[0m - Creating EnhancedDisasterControlNet...

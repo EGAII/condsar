@@ -1,0 +1,184 @@
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - ✅ WandB initialized
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 558, in main
+    trainer = CondsarTrainer(config)
+  File "D:\condsar\scripts\train.py", line 237, in __init__
+    self.logger.info("✅ WandB initialized")
+Message: '✅ WandB initialized'
+Arguments: ()
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - 🎯 Setting up STAGE A: Source Domain Training
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f3af' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 562, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 339, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 253, in setup_stage_a
+    self.logger.info("🎯 Setting up STAGE A: Source Domain Training")
+Message: '🎯 Setting up STAGE A: Source Domain Training'
+Arguments: ()
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - ================================================================================
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - Loading source dataset from ./data
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - Loaded 3155 images from metadata.json
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - Disaster types: ['Volcano', 'Earthquake', 'Wildfire', 'Flood']
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - ✅ Loaded 3155 training samples
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 562, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 339, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 273, in setup_stage_a
+    self.logger.info(f"✅ Loaded {len(self.train_dataset)} training samples")
+Message: '✅ Loaded 3155 training samples'
+Arguments: ()
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m -    Batch size: 2
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m -    Total batches: 1578
+2025-11-17 08:02:23 - condsar_trainer - [32mINFO[0m - Creating EnhancedDisasterControlNet...
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m - ✅ Model created with 379,647,296 parameters
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 562, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 339, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 285, in setup_stage_a
+    self.logger.info(f"✅ Model created with {self._count_parameters(self.model):,} parameters")
+Message: '✅ Model created with 379,647,296 parameters'
+Arguments: ()
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m - Creating SAR VAE Decoder...
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m - ✅ SAR VAE Decoder created with 2,656,257 parameters
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 562, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 339, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 296, in setup_stage_a
+    self.logger.info(f"✅ SAR VAE Decoder created with {self._count_parameters(self.sar_decoder):,} parameters")
+Message: '✅ SAR VAE Decoder created with 2,656,257 parameters'
+Arguments: ()
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m - ⚠️ No VAE encoder found to freeze
+--- Logging error ---
+Traceback (most recent call last):
+  File "D:\condsar\scripts\train.py", line 301, in setup_stage_a
+    for param in self.model.vae_encoder.parameters():
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\diffusers\models\modeling_utils.py", line 273, in __getattr__
+    return super().__getattr__(name)
+  File "C:\Users\26308\.conda\envs\diffusers\lib\site-packages\torch\nn\modules\module.py", line 1964, in __getattr__
+    raise AttributeError(
+AttributeError: 'EnhancedDisasterControlNet' object has no attribute 'vae_encoder'. Did you mean: 'mask_encoder'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u26a0' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 562, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 339, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 305, in setup_stage_a
+    self.logger.info("⚠️ No VAE encoder found to freeze")
+Message: '⚠️ No VAE encoder found to freeze'
+Arguments: ()
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m - ✅ Optimizer configured (lr=0.0001)
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 562, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 339, in train_stage_a
+    self.setup_stage_a()
+  File "D:\condsar\scripts\train.py", line 324, in setup_stage_a
+    self.logger.info(f"✅ Optimizer configured (lr={self.config.learning_rate})")
+Message: '✅ Optimizer configured (lr=0.0001)'
+Arguments: ()
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m -
+================================================================================
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m - 🚀 Starting Stage A Training
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Users\26308\.conda\envs\diffusers\lib\logging\__init__.py", line 1103, in emit
+    stream.write(msg + self.terminator)
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position 56: illegal multibyte sequence
+Call stack:
+  File "D:\condsar\scripts\train.py", line 568, in <module>
+    main()
+  File "D:\condsar\scripts\train.py", line 562, in main
+    trainer.train_stage_a()
+  File "D:\condsar\scripts\train.py", line 342, in train_stage_a
+    self.logger.info("🚀 Starting Stage A Training")
+Message: '🚀 Starting Stage A Training'
+Arguments: ()
+2025-11-17 08:02:25 - condsar_trainer - [32mINFO[0m - ================================================================================
+
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:02:26 - condsar_trainer - [31mERROR[0m - Error in batch 0: Given transposed=1, weight of size [4, 512, 4, 4], expected input[2, 320, 512, 512] to have 4 channels, but got 320 channels instead
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:02:47 - condsar_trainer - [31mERROR[0m - Error in batch 1: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:02:57 - condsar_trainer - [31mERROR[0m - Error in batch 2: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:03:10 - condsar_trainer - [31mERROR[0m - Error in batch 3: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 718.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:03:23 - condsar_trainer - [31mERROR[0m - Error in batch 4: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:03:36 - condsar_trainer - [31mERROR[0m - Error in batch 5: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 718.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:03:49 - condsar_trainer - [31mERROR[0m - Error in batch 6: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:04:02 - condsar_trainer - [31mERROR[0m - Error in batch 7: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 718.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:04:28 - condsar_trainer - [31mERROR[0m - Error in batch 8: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:04:28 - condsar_trainer - [31mERROR[0m - Error in batch 9: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 718.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:04:42 - condsar_trainer - [31mERROR[0m - Error in batch 10: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:04:55 - condsar_trainer - [31mERROR[0m - Error in batch 11: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 718.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:05:08 - condsar_trainer - [31mERROR[0m - Error in batch 12: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 719.15 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Mask processing failed: 'EnhancedDisasterControlNet' object has no attribute 'mask_processor'
+2025-11-17 08:05:21 - condsar_trainer - [31mERROR[0m - Error in batch 13: CUDA out of memory. Tried to allocate 1.25 GiB. GPU 0 has a total capacity of 8.00 GiB of which 0 bytes is free. Of the allocated memory 15.83 GiB is allocated by PyTorch, and 718.18 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

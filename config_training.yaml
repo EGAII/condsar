@@ -1,0 +1,175 @@
+# CONDSAR 训练配置文件 (YAML)
+# 用于 Stage A/B/C 三阶段训练
+
+# ==========================================
+# 1. 项目配置
+# ==========================================
+project:
+  name: condsar
+  description: "ControlNet for Disaster SAR Generation"
+  version: "1.0.0"
+
+# ==========================================
+# 2. 阶段配置
+# ==========================================
+stage: a  # 选项: a, b, c
+
+# ==========================================
+# 3. 数据配置
+# ==========================================
+data:
+  # 数据路径
+  source_dir: "./data/source"  # 源域数据 (RGB + SAR + Mask)
+  target_dir: "./data/target"  # 目标域数据 (仅RGB)
+  image_size: 512              # 输入图像大小
+
+  # 数据处理
+  num_workers: 4               # DataLoader 工作线程数
+  pin_memory: true             # 锁定内存以加速传输
+  prefetch_factor: 2           # 预取因子
+
+  # 灾害类型和强度
+  num_disaster_types: 4        # Volcano, Earthquake, Wildfire, Flood
+  num_severity_levels: 4       # 灾害强度等级数
+
+# ==========================================
+# 4. 模型配置
+# ==========================================
+model:
+  # 基础模型
+  pretrained_model_name: "stabilityai/stable-diffusion-2-1-base"
+
+  # ControlNet 配置
+  controlnet:
+    model_channels: 320        # 模型通道数
+    embedding_dim: 128         # Embedding 维度
+    num_disaster_types: 4      # 灾害类型数
+    disaster_embedding_dim: 128
+    num_severity_levels: 4     # 强度等级数
+    severity_embedding_dim: 128
+
+  # VAE 配置
+  vae:
+    freeze_encoder: true       # ✅ 冻结 VAE Encoder
+    latent_channels: 4
+    latent_size: 64
+
+  # SAR 解码器配置
+  sar_decoder:
+    latent_channels: 4
+    latent_size: 64
+    output_channels: 1         # SAR 单通道输出
+    hidden_channels: 128
+    trainable: true            # ✅ 可训练
+
+# ==========================================
+# 5. 训练配置 (Stage A)
+# ==========================================
+training:
+  stage_a:
+    batch_size: 4              # 批大小 (A100: 可增至8)
+    num_epochs: 100            # 训练轮次
+    learning_rate: 1.0e-4      # 学习率
+    weight_decay: 1.0e-5       # 权重衰减
+
+    # 梯度配置
+    gradient_accumulation_steps: 1  # 梯度累积步数
+    max_grad_norm: 1.0             # 梯度剪裁
+
+    # 预热和调度
+    warmup_steps: 1000         # 预热步数
+    lr_scheduler: "cosine"     # 学习率调度: cosine, linear, exponential
+
+    # 混合精度
+    use_mixed_precision: true  # 启用 FP16
+
+    # 优化器
+    optimizer: "adamw"         # AdamW 优化器
+    adam_epsilon: 1.0e-8
+    adam_beta1: 0.9
+    adam_beta2: 0.999
+
+# ==========================================
+# 6. 加权采样配置 (处理数据不均衡)
+# ==========================================
+weighted_sampler:
+  enabled: true               # ✅ 启用加权采样
+  strategy: "inverse_frequency"  # 策略: inverse_frequency, sqrt_frequency, custom
+  temperature: 1.0            # 权重平滑因子
+  replacement: true           # 有放回采样
+
+  # 灾害类型不均衡系数: 14.76:1
+  class_distribution:
+    Volcano: 1056    # 33.5%
+    Earthquake: 1833 # 58.1% (最多)
+    Wildfire: 142    # 4.5%
+    Flood: 124       # 3.9% (最少)
+
+  computed_weights:
+    Volcano: 0.747      # 欠采样
+    Earthquake: 0.430   # 欠采样
+    Wildfire: 5.570     # 过采样
+    Flood: 6.357        # 过采样
+
+# ==========================================
+# 7. 检查点配置
+# ==========================================
+checkpoint:
+  directory: "./outputs/checkpoints"
+  save_frequency: 10         # 每 N 个 epoch 保存
+  keep_best_only: false      # 是否只保留最优模型
+  resume_from: null          # 恢复的检查点路径
+
+# ==========================================
+# 8. W&B 日志配置
+# ==========================================
+wandb:
+  enabled: true              # ✅ 启用 WandB
+  offline: false             # 离线模式
+  project: "condsar"         # 项目名称
+  entity: null               # 用户名 (可选)
+  run_name: null             # 运行名称 (自动生成)
+  tags:
+    - stage_a
+    - weighted_sampler
+    - sd2.1
+    - controlnet
+  notes: "Stage A training with weighted sampling for disaster-aware SAR generation"
+
+# ==========================================
+# 9. 可视化配置
+# ==========================================
+visualization:
+  visualize_features: true   # 可视化特征图
+  visualize_frequency: 500   # 可视化频率 (步数)
+  save_attention_maps: true  # 保存注意力图
+  save_sample_outputs: true  # 保存样本输出
+
+# ==========================================
+# 10. 设备配置
+# ==========================================
+device:
+  type: "cuda"               # cuda or cpu
+  device_id: 0               # GPU ID (单卡)
+  sync_bn: false             # 同步批归一化
+  cudnn_benchmark: true      # CUDNN 基准测试
+
+# ==========================================
+# 11. 输出配置
+# ==========================================
+output:
+  directory: "./outputs"
+  log_dir: "./outputs/logs"
+  result_dir: "./outputs/results"
+  metrics_file: "metrics.json"
+
+# ==========================================
+# 12. 其他配置
+# ==========================================
+misc:
+  seed: 42                   # 随机种子
+  verbose: true              # 详细输出
+  log_frequency: 100         # 日志频率 (步数)
+  eval_frequency: 1000       # 评估频率 (步数)
+  num_samples_to_generate: 10  # 生成的样本数
+

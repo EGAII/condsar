@@ -72,21 +72,21 @@ def find_matching_files(data_dir: Path, image_id: str) -> Dict[str, Optional[str
     if pre_dir.exists():
         for f in pre_dir.glob('*'):
             if image_id in f.stem:
-                result['pre'] = str(f.relative_to(data_dir))
+                result['pre'] = str(f.relative_to(data_dir)).replace('\\', '/')
                 break
 
     # 查找post文件
     if post_dir.exists():
         for f in post_dir.glob('*'):
             if image_id in f.stem:
-                result['post'] = str(f.relative_to(data_dir))
+                result['post'] = str(f.relative_to(data_dir)).replace('\\', '/')
                 break
 
     # 查找mask文件
     if mask_dir.exists():
         for f in mask_dir.glob('*'):
             if image_id in f.stem:
-                result['mask'] = str(f.relative_to(data_dir))
+                result['mask'] = str(f.relative_to(data_dir)).replace('\\', '/')
                 break
 
     return result

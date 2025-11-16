@@ -157,7 +157,7 @@ def get_training_args_from_config(config: Dict) -> Dict:
 
     return {
         'stage': 'a',
-        'source_dir': config.get('data', {}).get('source_dir', './data/source'),
+        'source_dir': config.get('data', {}).get('source_dir', './data'),
         'batch_size': train_cfg.get('batch_size', 4),
         'num_epochs': train_cfg.get('num_epochs', 100),
         'learning_rate': train_cfg.get('learning_rate', 1e-4),

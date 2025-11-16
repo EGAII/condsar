@@ -8,20 +8,47 @@ import torch.nn.functional as F
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from torch.utils.data import DataLoader
-from diffusers import StableDiffusionPipeline, DDPMScheduler
-from diffusers.optimization import get_scheduler
+
+# Import diffusers components with fallback
+try:
+    from diffusers import StableDiffusionPipeline, DDPMScheduler
+except ImportError:
+    try:
+        from diffusers.pipelines import StableDiffusionPipeline
+        from diffusers.schedulers import DDPMScheduler
+    except ImportError:
+        StableDiffusionPipeline = None
+        DDPMScheduler = None
+
+try:
+    from diffusers.optimization import get_scheduler
+except ImportError:
+    try:
+        from diffusers.utils import get_scheduler
+    except ImportError:
+        get_scheduler = None
 import logging
 from pathlib import Path
 from typing import Optional, Dict, Any
 import argparse
 
-from enhanced_condsar import create_enhanced_controlnet
-from training_utils import (
-    setup_logger, setup_wandb, DisasterSARDataset,
-    MetricsTracker, save_checkpoint, load_checkpoint,
-    log_to_wandb
-)
-from weighted_sampler import WeightedSamplerConfig, create_weighted_dataloader
+try:
+    from .enhanced_condsar import create_enhanced_controlnet
+    from .training_utils import (
+        setup_logger, setup_wandb, DisasterSARDataset,
+        MetricsTracker, save_checkpoint, load_checkpoint,
+        log_to_wandb
+    )
+    from .weighted_sampler import WeightedSamplerConfig, create_weighted_dataloader
+except ImportError:
+    # Fallback for direct imports
+    from enhanced_condsar import create_enhanced_controlnet
+    from training_utils import (
+        setup_logger, setup_wandb, DisasterSARDataset,
+        MetricsTracker, save_checkpoint, load_checkpoint,
+        log_to_wandb
+    )
+    from weighted_sampler import WeightedSamplerConfig, create_weighted_dataloader
 
 logger = logging.getLogger(__name__)
 

@@ -23,7 +23,7 @@ def create_default_config() -> Dict[str, Any]:
         # Stage A Configuration
         "stage_a": {
             "enabled": True,
-            "source_dataset_dir": "./data/source",
+            "source_dataset_dir": "./data",
             "pretrained_model": "stabilityai/stable-diffusion-2-1-base",
             "batch_size": 4,
             "num_epochs": 100,
@@ -38,7 +38,7 @@ def create_default_config() -> Dict[str, Any]:
         # Stage B Configuration
         "stage_b": {
             "enabled": True,
-            "target_dataset_dir": "./data/target",
+            "target_dataset_dir": "./data",
             "controlnet_model_path": "./checkpoints/stage_a/best_model.pt",
             "pretrained_model": "stabilityai/stable-diffusion-2-1-base",
             "batch_size": 4,
@@ -54,7 +54,7 @@ def create_default_config() -> Dict[str, Any]:
         # Stage C Configuration
         "stage_c": {
             "enabled": True,
-            "source_dataset_dir": "./data/source",
+            "source_dataset_dir": "./data",
             "synthetic_dataset_dir": "./synthetic_data",
             "batch_size": 16,
             "num_epochs": 50,

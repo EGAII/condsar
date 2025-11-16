@@ -30,7 +30,6 @@ from src.utils.wandb_utils import WandBVisualizer, VisualizationCallback
 from src.utils.logger import setup_logger
 from models.training_utils import DisasterSARDataset, MetricsTracker
 from models.enhanced_condsar import EnhancedDisasterControlNet, SARVAEDecoder
-from models.training_stage_a import StageATrainer
 
 logger = logging.getLogger(__name__)
 
@@ -137,6 +136,10 @@ def merge_config_with_args(config: Dict, args: argparse.Namespace) -> Dict:
         if value is not None:  # 只覆盖显式指定的参数
             merged[key] = value
 
+    # 确保device和其他关键参数有默认值
+    if 'device' not in merged or merged.get('device') is None:
+        merged['device'] = 'cuda' if torch.cuda.is_available() else 'cpu'
+
     logger.info("✅ Config merged successfully")
     return merged
 
@@ -149,42 +152,47 @@ class TrainingConfig:
         self.project_name = kwargs.get('project_name', 'condsar')
         self.run_name = kwargs.get('run_name', f"train_{datetime.now().strftime('%Y%m%d_%H%M%S')}")
         self.stage = kwargs.get('stage', 'a')  # a, b, or c
-        self.device = kwargs.get('device', 'cuda' if torch.cuda.is_available() else 'cpu')
+
+        # Device - with extra safety check
+        device_val = kwargs.get('device', None)
+        if device_val is None or device_val == 'None':
+            device_val = 'cuda' if torch.cuda.is_available() else 'cpu'
+        self.device = device_val
 
         # 数据配置
-        self.source_dir = kwargs.get('source_dir', './data/source')
-        self.target_dir = kwargs.get('target_dir', './data/target')
-        self.image_size = kwargs.get('image_size', 512)
+        self.source_dir = kwargs.get('source_dir') or './data'
+        self.target_dir = kwargs.get('target_dir') or './data'
+        self.image_size = kwargs.get('image_size') or 512
 
         # 模型配置
-        self.model_channels = kwargs.get('model_channels', 320)
-        self.num_disaster_types = kwargs.get('num_disaster_types', 5)
-        self.embedding_dim = kwargs.get('embedding_dim', 128)
+        self.model_channels = kwargs.get('model_channels') or 320
+        self.num_disaster_types = kwargs.get('num_disaster_types') or 5
+        self.embedding_dim = kwargs.get('embedding_dim') or 128
 
         # 训练配置
-        self.batch_size = kwargs.get('batch_size', 4)
-        self.num_epochs = kwargs.get('num_epochs', 100)
-        self.learning_rate = kwargs.get('learning_rate', 1e-4)
-        self.weight_decay = kwargs.get('weight_decay', 1e-5)
-        self.gradient_accumulation_steps = kwargs.get('gradient_accumulation_steps', 1)
+        self.batch_size = kwargs.get('batch_size') or 4
+        self.num_epochs = kwargs.get('num_epochs') or 100
+        self.learning_rate = kwargs.get('learning_rate') or 1e-4
+        self.weight_decay = kwargs.get('weight_decay') or 1e-5
+        self.gradient_accumulation_steps = kwargs.get('gradient_accumulation_steps') or 1
 
         # 优化器配置
-        self.warmup_steps = kwargs.get('warmup_steps', 1000)
+        self.warmup_steps = kwargs.get('warmup_steps') or 1000
         self.use_mixed_precision = kwargs.get('use_mixed_precision', True)
 
         # 检查点配置
-        self.checkpoint_dir = kwargs.get('checkpoint_dir', './outputs/checkpoints')
-        self.save_frequency = kwargs.get('save_frequency', 10)  # 每N个epoch保存
+        self.checkpoint_dir = kwargs.get('checkpoint_dir') or './outputs/checkpoints'
+        self.save_frequency = kwargs.get('save_frequency') or 10
 
         # WandB配置
         self.use_wandb = kwargs.get('use_wandb', True)
         self.wandb_offline = kwargs.get('wandb_offline', False)
-        self.log_frequency = kwargs.get('log_frequency', 100)
+        self.log_frequency = kwargs.get('log_frequency') or 100
 
         # 可视化配置
         self.visualize_features = kwargs.get('visualize_features', True)
-        self.visualize_frequency = kwargs.get('visualize_frequency', 500)
-        self.output_dir = kwargs.get('output_dir', './outputs')
+        self.visualize_frequency = kwargs.get('visualize_frequency') or 500
+        self.output_dir = kwargs.get('output_dir') or './outputs'
 
     def to_dict(self) -> Dict:
         """转为字典"""
@@ -534,8 +542,8 @@ def main():
     # Step 3: 使用合并后的配置创建 TrainingConfig
     config = TrainingConfig(
         stage=merged_config.get('stage', 'a'),
-        source_dir=merged_config.get('source_dir', './data/source'),
-        target_dir=merged_config.get('target_dir', './data/target'),
+        source_dir=merged_config.get('source_dir', './data'),
+        target_dir=merged_config.get('target_dir', './data'),
         batch_size=merged_config.get('batch_size', 4),
         num_epochs=merged_config.get('num_epochs', 100),
         learning_rate=merged_config.get('learning_rate', 1e-4),

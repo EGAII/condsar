@@ -8,6 +8,9 @@ import torch.nn.functional as F
 from typing import Optional, Tuple
 import logging
 
+# Setup logger first (before imports that might use it)
+logger = logging.getLogger(__name__)
+
 # Import MaskEncoder from training_utils
 try:
     from .training_utils import MaskEncoder
@@ -16,17 +19,23 @@ except ImportError:
 
 # Import ControlNet with fallback
 try:
-    from diffusers.models.controlnets.controlnet import ControlNetModel, ControlNetConditioningEmbedding
+    from diffusers import ControlNetModel
 except Exception:
     try:
-        from diffusers.models.controlnet import ControlNetModel, ControlNetConditioningEmbedding
+        from diffusers.models import ControlNetModel
     except Exception:
-        try:
-            from diffusers.models.controlnets.controlnet import ControlNetModel
-            ControlNetConditioningEmbedding = None
-        except Exception:
-            from diffusers.models.controlnet import ControlNetModel
-            ControlNetConditioningEmbedding = None
+        logger.warning("⚠️ Could not import ControlNetModel from diffusers, will use nn.Module fallback")
+        ControlNetModel = None
+
+# Handle ControlNetConditioningEmbedding
+try:
+    from diffusers.models import ControlNetConditioningEmbedding
+except Exception:
+    ControlNetConditioningEmbedding = None
+
+# Fallback base class if ControlNetModel couldn't be imported
+if ControlNetModel is None:
+    ControlNetModel = nn.Module
 
 # Fallback implementation for ControlNetConditioningEmbedding
 if ControlNetConditioningEmbedding is None:
@@ -48,8 +57,6 @@ if ControlNetConditioningEmbedding is None:
         def forward(self, x):
             return self.project(x)
 
-
-logger = logging.getLogger(__name__)
 
 
 class DisasterTypeEmbedding(nn.Module):
@@ -136,25 +143,26 @@ class EnhancedDisasterControlNet(ControlNetModel):
         disaster_embedding_dim: int = 128,
         num_severity_levels: int = 4,
         severity_embedding_dim: int = 128,
+        embedding_dim: int = 128,
+        model_channels: int = 320,
+        pretrained_model_name: str = "stabilityai/stable-diffusion-2-1-base",
         **kwargs
     ):
-        # Extract before passing to super().__init__
+        super().__init__()
+
+        # Store custom parameters
         self.num_disaster_types = num_disaster_types
         self.disaster_embedding_dim = disaster_embedding_dim
         self.num_severity_levels = num_severity_levels
         self.severity_embedding_dim = severity_embedding_dim
+        self.embedding_dim = embedding_dim
+        self.model_channels = model_channels
 
-        super().__init__(**kwargs)
+        # Set block_out_channels
+        self.block_out_channels = (320, 640, 1280, 1280)
+        base_channels = self.block_out_channels[0]
 
-        # Get block_out_channels from parent or kwargs
-        block_out_channels = kwargs.get("block_out_channels", None)
-        if block_out_channels is None:
-            block_out_channels = getattr(self, "block_out_channels", (320, 640, 1280, 1280))
-
-        self.block_out_channels = block_out_channels
-        base_channels = block_out_channels[0]
-
-        logger.info(f"Initializing EnhancedDisasterControlNet with block_out_channels={block_out_channels}")
+        logger.info(f"Initializing EnhancedDisasterControlNet with block_out_channels={self.block_out_channels}")
 
         # ========== Condition Encoders ==========
 
@@ -372,46 +380,9 @@ class EnhancedDisasterControlNet(ControlNetModel):
             kwargs['controlnet_cond'] = fused
             logger.debug(f"Final control conditioning shape: {fused.shape}")
 
-        # ========== Handle Encoder Hidden States ==========
-        if encoder_hidden_states is not None and encoder_hidden_states.dim() == 3:
-            src_dim = encoder_hidden_states.size(-1)
-            target_dim = None
-
-            # Try to find target dimension from attention layers
-            for name, m in self.named_modules():
-                if isinstance(m, nn.Linear) and "to_k" in name:
-                    target_dim = m.in_features
-                    break
-
-            # Fallback strategies
-            if target_dim is None:
-                cfg = getattr(self, "config", None)
-                if cfg is not None and hasattr(cfg, "cross_attention_dim"):
-                    target_dim = cfg.cross_attention_dim
-                elif hasattr(self, "block_out_channels"):
-                    target_dim = self.block_out_channels[-1]
-
-            # Apply projection if needed
-            if target_dim is not None and src_dim != target_dim:
-                need_new = True
-                if getattr(self, "encoder_proj", None) is not None:
-                    try:
-                        if (self.encoder_proj.in_features == src_dim and
-                            self.encoder_proj.out_features == target_dim):
-                            need_new = False
-                    except Exception:
-                        need_new = True
-
-                if need_new:
-                    proj = nn.Linear(src_dim, target_dim)
-                    device = sample.device if sample is not None else encoder_hidden_states.device
-                    dtype = encoder_hidden_states.dtype
-                    proj = proj.to(device=device, dtype=dtype)
-                    self.encoder_proj = proj
-
-                encoder_hidden_states = self.encoder_proj(encoder_hidden_states)
-
-        return super().forward(sample, timestep, encoder_hidden_states, *args, **kwargs)
+        # Return fused features for use in controlnet
+        # The fused features will be used as conditioning input to the diffusion model
+        return fused if fused is not None else torch.zeros_like(sample)
 
 
 def create_enhanced_controlnet(

@@ -19,8 +19,8 @@ stage: a  # 选项: a, b, c
 # ==========================================
 data:
   # 数据路径
-  source_dir: "./data/source"  # 源域数据 (RGB + SAR + Mask)
-  target_dir: "./data/target"  # 目标域数据 (仅RGB)
+  source_dir: "./data"  # 源域数据 (RGB + SAR + Mask)
+  target_dir: "./data"  # 目标域数据 (仅RGB)
   image_size: 512              # 输入图像大小
 
   # 数据处理
@@ -67,7 +67,7 @@ model:
 # ==========================================
 training:
   stage_a:
-    batch_size: 4              # 批大小 (A100: 可增至8)
+    batch_size: 2              # 批大小 (A100: 可增至8)
     num_epochs: 100            # 训练轮次
     learning_rate: 1.0e-4      # 学习率
     weight_decay: 1.0e-5       # 权重衰减

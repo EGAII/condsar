@@ -1,6 +1,6 @@
 import torch
 import pytest
-from ..models.condsar import DisasterControlNet
+from models.condsar import DisasterControlNet
 
 class TestDisasterControlNet:
     @pytest.fixture

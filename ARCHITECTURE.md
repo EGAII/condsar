@@ -5,30 +5,30 @@
 ##  模型整体架构
 
 ```
-输入层:
+Input Layer:
 ├─ RGB Pre-disaster (B,3,512,512)
-├─ Building Mask (B,1,512,512)          [0-3: 背景/完好/轻损/重损]
+├─ Building Mask (B,1,512,512)          [0-3: background/intact/minor_damage/major_damage]
 ├─ Disaster Type (B,)                   [0-3: Volcano/Earthquake/Wildfire/Flood]
-└─ Disaster Severity (B,)               [0.0-1.0: 灾害强度]
+└─ Disaster Severity (B,)               [0.0-1.0: disaster severity]
 
-        ↓ [处理转换]
+        ↓ [Processing / Transformation]
 
-条件处理:
-├─ RGB → VAE Encoder (冻结) → Latent (B,4,64,64) → 投影 → RGB Features (B,320,64,64)
-├─ Mask → MaskEncoder (可训练) → Mask Features (B,320,64,64)
-├─ Type → Embedding (可训练) → 投影+广播 → Type Features (B,320,64,64)
-└─ Severity → 离散化 → Embedding (可训练) → 投影+广播 → Severity Features (B,320,64,64)
+Condition Processing:
+├─ RGB → VAE Encoder (frozen) → Latent (B,4,64,64) → Projection → RGB Features (B,320,64,64)
+├─ Mask → MaskEncoder (trainable) → Mask Features (B,320,64,64)
+├─ Type → Embedding (trainable) → Projection + Broadcast → Type Features (B,320,64,64)
+└─ Severity → Discretize → Embedding (trainable) → Projection + Broadcast → Severity Features (B,320,64,64)
 
-        ↓ [多模态融合]
+        ↓ [Multimodal Fusion]
 
-融合层:
+Fusion Layer:
 ├─ RGB + Mask → Spatial Fusion → (B,320,64,64)
 ├─ Type + Severity → Disaster Fusion → (B,320,64,64)
 └─ Spatial + Disaster → Multi-Modal Fusion → Control Embeddings (B,320,64,64)
 
-        ↓ [生成]
+        ↓ [Generation]
 
-输出: SAR 灾后图像 (B,1,512,512)
+Output: SAR post-disaster image (B,1,512,512)
 ```
 
 ---

@@ -1,0 +1,217 @@
+# CONDSAR NeDS Training Configuration
+# Refactored based on NeDS architecture for RGB-to-SAR generation
+
+# ==========================================
+# 1. Project Configuration
+# ==========================================
+project:
+  name: condsar_neds
+  description: "ControlNet-based Disaster SAR Generation (NeDS Architecture)"
+  version: "2.0.0"
+  author: "CONDSAR Team"
+
+# ==========================================
+# 2. Training Stage
+# ==========================================
+stage: a  # Options: a (train on source), b (generate synthetic), c (mixed training)
+
+# ==========================================
+# 3. Data Configuration
+# ==========================================
+data:
+  # Data paths (must contain metadata.json)
+  source_dir: "./condsar/data"       # Source domain (RGB pre + SAR post + Mask)
+  target_dir: "./condsar/data_target"  # Target domain (only RGB pre) - for Stage B/C
+
+  # Data structure
+  # source_dir/
+  # ├── metadata.json
+  # ├── pre/          # RGB optical images
+  # ├── post/         # SAR ground truth
+  # └── mask/         # Building/damage masks
+
+  image_size: 512              # Input image size (512x512)
+
+  # DataLoader settings
+  batch_size: 4                # Batch size (increase if GPU memory allows)
+  num_workers: 4               # Number of data loading workers
+  pin_memory: true             # Pin memory for faster GPU transfer
+  prefetch_factor: 2           # Prefetch batches
+
+  # Disaster types (0-4)
+  num_disaster_types: 5        # Volcano, Earthquake, Wildfire, Storm, Flood
+  num_severity_levels: 4       # 4 discrete severity levels
+
+# ==========================================
+# 4. Model Configuration
+# ==========================================
+model:
+  # Base pretrained model
+  pretrained_model_name: "stabilityai/stable-diffusion-2-1-base"
+
+  # ControlNet (CONDSAR NeDS)
+  controlnet:
+    in_channels: 4                    # VAE latent channels
+    conditioning_channels: 1          # Mask channels (single-channel mask)
+    block_out_channels: [320, 640, 1280, 1280]
+    num_disaster_types: 5             # Match data.num_disaster_types
+
+  # VAE Configuration
+  vae:
+    freeze_encoder: true              # ✅ Freeze VAE encoder (only for encoding RGB)
+    freeze_decoder: true              # ✅ Freeze VAE decoder (not used)
+    latent_channels: 4
+    latent_size: 64                   # 512 / 8 = 64
+    scaling_factor: 0.18215           # SD2.1 VAE scaling factor
+
+  # SAR Decoder (trainable)
+  sar_decoder:
+    latent_channels: 4
+    latent_size: 64
+    output_channels: 1                # Single-channel SAR output
+    hidden_channels: 128
+    trainable: true                   # ✅ Train SAR decoder
+
+  # UNet (frozen during Stage A)
+  unet:
+    freeze: true                      # ✅ Freeze UNet during Stage A
+
+# ==========================================
+# 5. Training Configuration - Stage A
+# ==========================================
+training:
+  stage_a:
+    # Basic settings
+    num_epochs: 100                   # Training epochs
+    learning_rate: 1.0e-4             # Learning rate
+    weight_decay: 1.0e-2              # Weight decay for AdamW
+
+    # Gradient settings
+    gradient_accumulation_steps: 1    # Gradient accumulation (effective batch = batch_size * this)
+    max_grad_norm: 1.0                # Gradient clipping
+
+    # Optimizer
+    optimizer: "adamw"                # AdamW optimizer
+    adam_epsilon: 1.0e-8
+    adam_beta1: 0.9
+    adam_beta2: 0.999
+
+    # Learning rate scheduler
+    lr_scheduler: "cosine"            # Options: cosine, linear, constant
+    warmup_steps: 500                 # Warmup steps
+
+    # Mixed precision
+    use_mixed_precision: true         # ✅ Use FP16 mixed precision
+
+    # Loss weights
+    diffusion_loss_weight: 1.0        # Weight for diffusion loss
+    reconstruction_loss_weight: 0.1   # Weight for SAR reconstruction loss
+
+    # Checkpointing
+    save_every_n_epochs: 10           # Save checkpoint every N epochs
+    checkpoint_dir: "./checkpoints/stage_a_neds"
+
+    # Validation
+    validate_every_n_epochs: 5        # Run validation every N epochs
+    num_validation_samples: 8         # Number of samples to generate for validation
+
+# ==========================================
+# 6. Training Configuration - Stage B (Future)
+# ==========================================
+training:
+  stage_b:
+    # Generate synthetic data on target domain
+    num_synthetic_samples: 1000       # Number of synthetic samples to generate
+    output_dir: "./data/synthetic"
+
+    # Sampling settings
+    num_inference_steps: 50           # DDPM sampling steps
+    guidance_scale: 7.5               # Classifier-free guidance scale
+
+    # Disaster simulation (randomly sample)
+    disaster_type_distribution: "uniform"  # uniform, custom
+    severity_distribution: [0.1, 0.4, 0.4, 0.1]  # [none, minor, major, destroyed]
+
+# ==========================================
+# 7. Training Configuration - Stage C (Future)
+# ==========================================
+training:
+  stage_c:
+    # Mixed training (real + synthetic)
+    num_epochs: 50
+    learning_rate: 5.0e-5             # Lower LR for fine-tuning
+
+    # Data mixing
+    real_to_synthetic_ratio: 0.5      # 50% real, 50% synthetic per batch
+
+    # Loss settings
+    real_data_loss: ["localization", "classification"]  # Both losses
+    synthetic_data_loss: ["classification"]             # Only classification loss
+
+# ==========================================
+# 8. Logging & Monitoring
+# ==========================================
+logging:
+  # Weights & Biases
+  use_wandb: true
+  wandb_project: "condsar_neds"
+  wandb_entity: null                  # Your W&B username/team (optional)
+
+  # Local logging
+  log_dir: "./logs"
+  log_level: "INFO"                   # DEBUG, INFO, WARNING, ERROR
+
+  # Logging frequency
+  log_every_n_steps: 10               # Log metrics every N steps
+  save_images_every_n_epochs: 5       # Save sample images every N epochs
+
+# ==========================================
+# 9. Hardware Configuration
+# ==========================================
+hardware:
+  device: "cuda:0"                    # cuda:0, cuda:1, cpu
+  num_gpus: 1                         # Number of GPUs (for future multi-GPU support)
+
+  # Memory optimization
+  gradient_checkpointing: false       # Enable if OOM (slower but saves memory)
+  enable_xformers: false              # Enable xformers attention (if installed)
+
+# ==========================================
+# 10. Inference Configuration
+# ==========================================
+inference:
+  # Sampling settings
+  num_inference_steps: 50             # DDPM/DDIM steps
+  guidance_scale: 7.5                 # CFG scale
+  eta: 0.0                            # DDIM eta
+
+  # Output
+  output_dir: "./outputs"
+  output_format: "png"                # png, jpg, tif
+  save_latents: false                 # Save intermediate latents
+
+  # Batch inference
+  batch_size: 1                       # Inference batch size
+
+# ==========================================
+# 11. Data Augmentation (Optional)
+# ==========================================
+augmentation:
+  enabled: false                      # Enable data augmentation
+
+  # Augmentation operations
+  random_flip: true                   # Random horizontal flip
+  random_rotation: false              # Random rotation
+  color_jitter: false                 # Color jittering (for RGB)
+
+  # Augmentation probability
+  aug_prob: 0.5                       # Probability of applying augmentation
+
+# ==========================================
+# 12. Reproducibility
+# ==========================================
+reproducibility:
+  seed: 42                            # Random seed
+  deterministic: false                # Use deterministic algorithms (slower)
+  benchmark: true                     # Enable cudnn benchmark (faster but non-deterministic)
+

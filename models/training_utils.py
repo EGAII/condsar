@@ -330,32 +330,40 @@ def setup_wandb(
 
 class DisasterSARDataset(Dataset):
     """
-    Dataset for Disaster SAR Image Generation
+    Dataset for Disaster SAR Image Generation (NeDS-based)
 
     Expected structure with metadata.json:
     dataset/
     ├── metadata.json  # File paths and disaster info
-    ├── pre/           # Pre-disaster RGB images
-    ├── post/          # Post-disaster SAR images
-    └── mask/          # Building/damage masks
+    ├── pre/           # Pre-disaster RGB optical images
+    ├── post/          # Post-disaster SAR images (ground truth)
+    └── mask/          # Building/damage masks (for ControlNet)
 
     metadata.json format (REQUIRED):
     {
         "image_id": {
-            "pre": "path/to/pre/image.jpg",
-            "post": "path/to/post/image.tif",
-            "mask": "path/to/mask/image.tif",
-            "disaster_type": 0-3,  # 0=Volcano, 1=Earthquake, 2=Wildfire, 3=Flood
-            "severity": 0.0-1.0    # Disaster intensity
+            "pre": "pre/image.jpg",      # Relative path to pre-disaster RGB
+            "post": "post/image.tif",     # Relative path to post-disaster SAR
+            "mask": "mask/image.tif",     # Relative path to mask
+            "disaster_type": 0-4,         # 0=Volcano, 1=Earthquake, 2=Wildfire, 3=Storm, 4=Flood
+            "severity": 0.0-1.0           # Disaster intensity/severity
         }
     }
+
+    Returns:
+        - rgb_image: Pre-disaster RGB optical image (B,3,H,W) [0,1]
+        - sar_image: Post-disaster SAR ground truth (B,1,H,W) [0,1]
+        - mask: Building/damage mask (B,1,H,W) values in [0,3]
+        - disaster_type: Disaster category index (B,)
+        - disaster_severity: Disaster intensity (B,) in [0,1]
     """
 
     DISASTER_TYPES = {
         0: "Volcano",
         1: "Earthquake",
         2: "Wildfire",
-        3: "Flood"
+        3: "Storm",
+        4: "Flood"
     }
 
     def __init__(
